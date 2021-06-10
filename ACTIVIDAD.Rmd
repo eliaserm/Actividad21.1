@@ -1,5 +1,5 @@
 ---
-title: "dataset con la información de las paradas de metro de Madrid"
+title: "Dataset con la información de las paradas de metro de Madrid"
 author: "Team Taquito"
 date: "10/6/2021"
 output: html_document
@@ -24,7 +24,8 @@ La API correspondientes base:
   library(curl)
   library(tidyverse)
 ```
-
+## Peticion API para archivo JSON y parse a Data.frame
+La parte del código que realiza la petición a una API, la cual retorna un archivo JSON que luego nosotros convertimos a una data.frame.
 
 ```{r, echo=TRUE}
 q <- curl_escape("select ID, NAME, LINE, PLACE, LAT, LNG from public.paradas_metro_madrid")
@@ -32,7 +33,8 @@ uri_paradas_metro <- paste("https://idealista.carto.com/api/v2/sql?q=",q, sep=""
 paradas_metro <- fromJSON(uri_paradas_metro)
 paradas_metro <- paradas_metro[["rows"]]
 ```
-
+## Sistena dinamico de tabla que ofrece Shiny de JSON.
+En esta parte del código tenemos un "inputPanel" que es un simple panel de control para parámetros que luego usamos en la "RenderTabla", la cual toma los registros que cumplen con el "filter" de inputPanel.
 
 ```{r, echo=TRUE}
 inputPanel(

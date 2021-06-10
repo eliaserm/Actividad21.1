@@ -1,0 +1,61 @@
+---
+title: "dataset con la información de las paradas de metro de Madrid"
+author: "Team Taquito"
+date: "10/6/2021"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Informacion de paradas de metro de Madrid
+
+El lugar de donde se toma la información para analizar el Dataset relacionado con las paradas más relevantes dentro de Madrid provienen de la siguiente página:
+<https://www.adictosaltrabajo.com/2019/10/30/leer-un-json-con-r-rstudio/>.
+
+Lo primero que nosotros vamos a realizar será las peticiones API al servidor que contienen la información y algo muy importante es que las peticiones API las podemos hacer igual que una query SQL, pero en lugar de tener como resultado una dupla lo que vamos a tener es un archivo JSON. Esto permitiría cubrir los apartados de bases SQL Y JSON.
+La API correspondientes base:
+<https://idealista.carto.com:443/api/v2/sql?/>.
+
+```{r, include=FALSE}
+  library(jsonlite)
+  library(curl)
+  library(tidyverse)
+```
+
+
+```{r, echo=TRUE}
+q <- curl_escape("select ID, NAME, LINE, PLACE, LAT, LNG from public.paradas_metro_madrid")
+uri_paradas_metro <- paste("https://idealista.carto.com/api/v2/sql?q=",q, sep="")
+paradas_metro <- fromJSON(uri_paradas_metro)
+paradas_metro <- paradas_metro[["rows"]]
+```
+
+
+```{r, echo=TRUE}
+inputPanel(
+  selectInput("n_breaks", label = "Station:",
+              choices = c("L1","L2","L3","L4","L5","L6","L6","L7","L8","L9","L10"), selected = "L2")
+)
+
+renderTable({paradas_metro%>%filter(line==input$n_breaks)})
+
+```
+
+## Embedded Application
+
+It's also possible to embed an entire Shiny application within an R Markdown document using the `shinyAppDir` function. This example embeds a Shiny application located in another directory:
+
+```{r tabsets, echo=FALSE}
+```
+
+Note the use of the `height` parameter to determine how much vertical space the embedded application should occupy.
+
+You can also use the `shinyApp` function to define an application inline rather then in an external directory.
+
+In all of R code chunks above the `echo = FALSE` attribute is used. This is to prevent the R code within the chunk from rendering in the document alongside the Shiny components.
+
+
+

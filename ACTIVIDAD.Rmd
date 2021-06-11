@@ -68,4 +68,9 @@ WHERE $__timeFilter(dashboard.created)
 ## Tabla de Uso del sistema 
 Puede controlar el nombre de las columnas del panel Tabla utilizando la sintaxis de selección de columna normal como SQL.
 ![Insertando Imagen](od.jpg){withd=20%}
+```{r}
 
+```
+
+## Markdown y shiny vs Grafana
+La realidad de las herramientas usadas en la práctica es que las 2 tienen una gran utilidad, pero lo que pudimos observar mi compañero y yo es que la relación de precio y utilidad, la ganadora es Markdown y chiny porque estas permiten generar un web dinámica para que el usuario pueda realizar la búsqueda de la información que considere relevante mientras que grafana es una herramienta para personas más especializada en la cual se comparte información entre especialistas en el ramo, mientras que la otra herramienta te permite crear una web que todos pueden entender.

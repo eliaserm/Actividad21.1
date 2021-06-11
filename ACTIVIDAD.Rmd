@@ -46,18 +46,26 @@ renderTable({paradas_metro%>%filter(line==input$n_breaks)})
 
 ```
 
-## Embedded Application
+## Consultas de tabla
 
-It's also possible to embed an entire Shiny application within an R Markdown document using the `shinyAppDir` function. This example embeds a Shiny application located in another directory:
+Si la opción Formatear como consulta está establecida en Tabla, básicamente puede realizar cualquier tipo de consulta SQL. El panel de la tabla mostrará automáticamente los resultados de las columnas y filas que devuelva su consulta.
+![Insertando Imagen](ap.png){withd=20%}
+
 
 ```{r tabsets, echo=FALSE}
 ```
+## Codigo de consulta
+SELECT
+  title as 'Title',
+  user.login as 'Created By' ,
+  dashboard.created as 'Created On'
+ FROM dashboard
+INNER JOIN user on user.id = dashboard.created_by
+WHERE $__timeFilter(dashboard.created)
+```{r}
 
-Note the use of the `height` parameter to determine how much vertical space the embedded application should occupy.
-
-You can also use the `shinyApp` function to define an application inline rather then in an external directory.
-
-In all of R code chunks above the `echo = FALSE` attribute is used. This is to prevent the R code within the chunk from rendering in the document alongside the Shiny components.
-
-
+```
+## Tabla de Uso del sistema 
+Puede controlar el nombre de las columnas del panel Tabla utilizando la sintaxis de selección de columna normal como SQL.
+![Insertando Imagen](od.jpg){withd=20%}
 

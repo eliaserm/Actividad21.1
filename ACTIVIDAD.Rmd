@@ -4,6 +4,8 @@ author: "Team Taquito"
 date: "10/6/2021"
 output: html_document
 runtime: shiny
+resource_files:
+- ap.png
 ---
 
 ```{r setup, include=TRUE}

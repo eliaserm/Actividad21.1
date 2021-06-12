@@ -1,0 +1,14 @@
+name: ACTIVIDAD
+title: ACTIVIDAD
+username:
+account: eliaserm
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4256613
+bundleId: 4703744
+url: https://eliaserm.shinyapps.io/ACTIVIDAD/
+when: 1623383563.84682
+lastSyncTime: 1623383563.84686
+asMultiple: FALSE
+asStatic: FALSE
+additionalFiles: ap.png
